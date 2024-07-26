@@ -1,51 +1,37 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-int add(int x, int y)
+int beautySum(string str)
 {
-    return x + y;
-}
 
-double divi(int x, int y)
-{
-    if (y != 0)
+    int sum = 0;
+    vector<string> words;
+    for (int i = 0; i < str.length(); i++)
     {
-        return x / y;
+        string subStr;
+
+        for (int j = i; j < str.length(); j++)
+        {
+            subStr += str[j];
+            words.push_back(subStr);
+        }
     }
-    return -1;
-}
-int mul(int x, int y)
-{
-    return x * y;
-}
-int sub(int x, int y)
-{
-    return x - y;
+    for (auto it = words.begin(); it != words.end(); ++it)
+    {
+        string temp = *it;
+        vector<int> temps(26, 0);
+        for (int i = 0; i < temp.length(); i++)
+        {
+            temps[temp[i] - 'a']++;
+        }
+        int maxi = *max_element(temps.begin(), temps.end());
+        int mini = *min_element(temps.begin(), temps.end());
+        if (maxi - mini > 0)
+            sum += maxi - mini;
+    }
+    return sum;
 }
 int main()
 {
-
-    cout << "1.Add \n2.Sub \n3.Div \n4.Mul";
-    int n;
-    cin >> n;
-    int x, y;
-    cout << "Enter x and y";
-    cin >> x >> y;
-    switch (n)
-    {
-    case 1:
-        cout << add(x, y);
-        break;
-    case 2:
-        cout << sub(x, y);
-        break;
-    case 3:
-        cout << divi(x, y);
-        break;
-    case 4:
-        cout << mul(x, y);
-        break;
-
-    default:
-        break;
-    }
+    beautySum("aabcb");
+    return 0;
 }
