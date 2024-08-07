@@ -32,6 +32,8 @@ int beautySum(string str)
 }
 int main()
 {
+    queue<int> temp;
+    
     beautySum("aabcb");
     return 0;
 }
